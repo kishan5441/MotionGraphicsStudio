@@ -1,0 +1,331 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#090d18">
+<title>Motion Graphics Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+Devanagari:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#090d18;--panel:#111827;--panel2:#172033;--line:#263247;--text:#f5f7ff;--muted:#91a0b8;--accent:#a78bfa}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,"Noto Sans Devanagari",sans-serif}
+button,input,select{font:inherit}
+button{cursor:pointer}
+.top{height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 17px;border-bottom:1px solid var(--line);position:sticky;top:0;background:#090d18ee;z-index:5}
+.brand{font-size:15px;font-weight:900;display:flex;align-items:center;gap:10px}
+.logo{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,#a78bfa,#557cff);display:grid;place-items:center}
+.brand small{display:block;font-size:9px;color:var(--muted);letter-spacing:1px;margin-top:3px}
+.actions{display:flex;gap:7px}
+.btn{background:var(--panel2);border:1px solid var(--line);color:white;border-radius:8px;padding:9px 12px;font-size:11px;font-weight:700}
+.btn.primary{background:var(--accent);color:#170e2c;border-color:var(--accent)}
+.btn:disabled{opacity:.4}
+.layout{display:grid;grid-template-columns:230px minmax(0,1fr) 275px;gap:12px;padding:12px;max-width:1600px;margin:auto}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;min-width:0}
+.ph{padding:14px;border-bottom:1px solid var(--line);font-size:12px;font-weight:800;display:flex;justify-content:space-between}
+.muted{font-size:10px;color:var(--muted);font-weight:500}
+.library{padding:10px}
+.search{width:100%;padding:10px;background:#0a1120;border:1px solid var(--line);border-radius:8px;color:white;outline:0;font-size:12px;margin-bottom:12px}
+.cat{font-size:9px;letter-spacing:1px;color:var(--muted);font-weight:800;text-transform:uppercase;margin:12px 3px 7px}
+.template{width:100%;display:flex;align-items:center;gap:9px;text-align:left;padding:9px;background:#151f31;border:1px solid transparent;border-radius:8px;color:white;margin-bottom:6px}
+.template.active{border-color:var(--accent);background:#211d3a}
+.ticon{width:32px;height:32px;border-radius:8px;background:#293550;display:grid;place-items:center;flex-shrink:0}
+.template b{font-size:10px;display:block}.template small{font-size:9px;color:var(--muted);display:block;margin-top:3px}
+.center{display:flex;flex-direction:column;gap:10px;min-width:0}
+.preview{padding:12px}
+.previewhead{display:flex;justify-content:space-between;margin-bottom:10px;font-size:11px;font-weight:800}
+.canvaswrap{width:100%;aspect-ratio:16/9;border:1px solid #344158;border-radius:8px;overflow:hidden;background:#080c15}
+canvas{display:block;width:100%;height:100%}
+.controls{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-top:10px}
+.time{margin-left:auto;font-size:10px;color:var(--muted);font-variant-numeric:tabular-nums}
+.track{height:4px;background:#273248;border-radius:9px;margin-top:10px;overflow:hidden}
+.fill{height:100%;width:0;background:var(--accent)}
+.status{font-size:10px;color:var(--muted);padding:10px 2px}
+.editor{padding:12px}
+.section{font-size:9px;letter-spacing:1px;color:#aab6cc;font-weight:800;margin:14px 0 10px;text-transform:uppercase}
+.field{margin-bottom:11px}
+.field label{display:flex;justify-content:space-between;font-size:10px;color:#bdc8da;margin-bottom:5px}
+.field input,.field select{width:100%;padding:9px;background:#0a1120;border:1px solid var(--line);border-radius:7px;color:white;outline:0;font-size:11px}
+.field input[type=color]{height:34px;padding:3px}
+.field input[type=range]{padding:0;accent-color:var(--accent)}
+.field input:focus,.field select:focus{border-color:var(--accent)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.savebar{display:flex;gap:7px;margin-top:12px}
+.savebar button{flex:1}
+.footer{text-align:center;color:var(--muted);font-size:10px;padding:12px 10px 25px}
+@media(max-width:1000px){.layout{grid-template-columns:190px minmax(0,1fr)}.right{grid-column:1/-1}}
+@media(max-width:650px){
+ .top{height:55px;padding:0 10px}.brand{font-size:12px}.brand small{font-size:8px}
+ .actions .btn{padding:8px;font-size:10px}
+ .layout{display:flex;flex-direction:column;padding:8px;gap:9px}
+ .library{display:grid;grid-template-columns:1fr 1fr;gap:5px}
+ .search,.cat{grid-column:1/-1}
+ .template{margin:0;padding:7px;min-width:0}.ticon{width:29px;height:29px}
+ .template b{font-size:9px}.template small{font-size:8px}
+ .preview{padding:8px}.controls .btn{padding:8px;font-size:10px}
+ .editor{padding:10px}
+}
+</style>
+</head>
+<body>
+<header class="top">
+ <div class="brand"><div class="logo">✦</div><div>Motion Studio<small>MODULAR ANIMATION WORKSPACE</small></div></div>
+ <div class="actions">
+  <button class="btn" id="save">Save</button>
+  <button class="btn primary" id="export">Export WebM</button>
+ </div>
+</header>
+
+<main class="layout">
+ <aside class="panel">
+  <div class="ph">Template Library <span class="muted" id="templateCount">0</span></div>
+  <div class="library">
+   <input class="search" id="search" placeholder="Search templates...">
+   <div id="libraryList"></div>
+  </div>
+ </aside>
+
+ <section class="center">
+  <div class="panel preview">
+   <div class="previewhead"><span id="sceneTitle">Loading studio...</span><span class="muted">1920 × 1080 · 16:9</span></div>
+   <div class="canvaswrap"><canvas id="canvas" width="1920" height="1080"></canvas></div>
+   <div class="controls">
+    <button class="btn primary" id="play">▶ Play</button>
+    <button class="btn" id="pause">Ⅱ Pause</button>
+    <button class="btn" id="replay">↻ Replay</button>
+    <span class="time" id="time">00:00 / 00:06</span>
+   </div>
+   <div class="track"><div class="fill" id="progress"></div></div>
+   <div class="status" id="status">Ready. Select a template to begin.</div>
+  </div>
+ </section>
+
+ <aside class="panel right">
+  <div class="ph">Template Settings <span class="muted">EDITOR</span></div>
+  <div class="editor">
+   <div id="settings">
+    <div class="muted">Select an animation template.</div>
+   </div>
+   <div class="section">Global Settings</div>
+   <div class="field">
+    <label>Duration <span id="durationLabel">6 sec</span></label>
+    <input id="duration" type="range" min="3" max="20" value="6">
+   </div>
+   <div class="field">
+    <label>Animation speed <span id="speedLabel">1.0×</span></label>
+    <input id="speed" type="range" min="50" max="200" value="100">
+   </div>
+   <div class="savebar">
+    <button class="btn" id="saveTemplate">Save Design</button>
+    <button class="btn" id="loadTemplate">Load Design</button>
+   </div>
+   <p class="muted">Design settings are saved in this browser using LocalStorage.</p>
+  </div>
+ </aside>
+</main>
+<div class="footer">Motion Graphics Studio · Modular JavaScript Templates · GitHub Pages Ready</div>
+
+<script type="module">
+import {manifest} from "./templates/manifest.js";
+import {drawBackground,roundedRect,drawText,formatMoney,easeOut} from "./engine/helpers.js";
+
+const canvas=document.getElementById("canvas");
+const ctx=canvas.getContext("2d");
+const $=id=>document.getElementById(id);
+const W=1920,H=1080;
+let active=null,settings={},playing=false,elapsed=0,raf=0,last=0,recording=false;
+let duration=6,speed=1;
+
+function setStatus(msg){$("status").textContent=msg}
+function fmt(sec){
+ const s=Math.floor(sec%60),m=Math.floor(sec/60);
+ return String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
+}
+function currentProgress(){return Math.min(1,elapsed/(duration*1000))}
+
+function draw(){
+ if(!active)return;
+ const p=currentProgress();
+ ctx.clearRect(0,0,W,H);
+ const helpers={drawBackground,roundedRect,drawText,formatMoney,easeOut,W,H};
+ active.render(ctx,p,settings,helpers);
+ $("progress").style.width=(p*100)+"%";
+ $("time").textContent=fmt(elapsed/1000)+" / "+fmt(duration);
+}
+
+function pause(){
+ playing=false;cancelAnimationFrame(raf);
+ $("play").textContent="▶ Play";
+}
+function frame(now){
+ if(!playing)return;
+ if(!last)last=now;
+ const delta=Math.min(60,now-last);last=now;
+ elapsed+=delta*speed;
+ if(elapsed>=duration*1000){
+  elapsed=duration*1000;draw();pause();return;
+ }
+ draw();raf=requestAnimationFrame(frame);
+}
+function play(){
+ if(!active)return;
+ if(elapsed>=duration*1000)elapsed=0;
+ if(playing)return;
+ playing=true;last=0;$("play").textContent="▶ Playing";
+ raf=requestAnimationFrame(frame);
+}
+function replay(){pause();elapsed=0;draw();play()}
+$("play").onclick=play;
+$("pause").onclick=()=>{pause();draw()};
+$("replay").onclick=replay;
+
+function makeControl(field){
+ const wrap=document.createElement("div");wrap.className="field";
+ const label=document.createElement("label");label.textContent=field.label;
+ let input;
+ if(field.type==="select"){
+  input=document.createElement("select");
+  field.options.forEach(opt=>{
+   const o=document.createElement("option");
+   o.value=opt.value;o.textContent=opt.label;input.appendChild(o);
+  });
+ }else{
+  input=document.createElement("input");
+  input.type=field.type||"text";
+  if(field.min!==undefined)input.min=field.min;
+  if(field.max!==undefined)input.max=field.max;
+  if(field.step!==undefined)input.step=field.step;
+ }
+ input.value=settings[field.key]??field.default;
+ input.addEventListener("input",()=>{
+  settings[field.key]=field.type==="number"?Number(input.value):input.value;
+  if(!playing)draw();
+ });
+ wrap.append(label,input);return wrap;
+}
+
+function buildSettings(){
+ const box=$("settings");box.innerHTML="";
+ if(!active)return;
+ const title=document.createElement("div");title.className="section";
+ title.textContent=active.name+" · EDITABLE";box.appendChild(title);
+ (active.controls||[]).forEach(f=>box.appendChild(makeControl(f)));
+}
+
+function renderLibrary(query=""){
+ const list=$("libraryList");list.innerHTML="";
+ let lastCategory="";
+ manifest.filter(t=>(t.name+" "+t.description+" "+t.category).toLowerCase().includes(query.toLowerCase())).forEach(t=>{
+  if(t.category!==lastCategory){
+   const cat=document.createElement("div");cat.className="cat";
+   cat.textContent=t.category;list.appendChild(cat);lastCategory=t.category;
+  }
+  const b=document.createElement("button");
+  b.className="template"+(active?.id===t.id?" active":"");
+  b.innerHTML='<span class="ticon"></span><span><b></b><small></small></span>';
+  b.querySelector(".ticon").textContent=t.icon||"✦";
+  b.querySelector("b").textContent=t.name;
+  b.querySelector("small").textContent=t.description;
+  b.onclick=()=>loadModule(t);
+  list.appendChild(b);
+ });
+}
+async function loadModule(info){
+ pause();setStatus("Loading "+info.name+"...");
+ try{
+  const module=await import(info.path);
+  active=module.default;
+  settings=structuredClone(active.defaults||{});
+  duration=Number(active.duration||6);
+  $("duration").value=duration;
+  $("durationLabel").textContent=duration+" sec";
+  elapsed=0;
+  $("sceneTitle").textContent=active.name;
+  buildSettings();renderLibrary($("search").value);
+  draw();setStatus(active.description||"Template loaded.");
+ }catch(err){
+  console.error(err);setStatus("Could not load template. Check the module path and filename.");
+ }
+}
+$("search").addEventListener("input",e=>renderLibrary(e.target.value));
+
+$("duration").addEventListener("input",e=>{
+ duration=Number(e.target.value);
+ $("durationLabel").textContent=duration+" sec";
+ elapsed=Math.min(elapsed,duration*1000);
+ if(!playing)draw();
+});
+$("speed").addEventListener("input",e=>{
+ speed=Number(e.target.value)/100;
+ $("speedLabel").textContent=speed.toFixed(1)+"×";
+});
+
+function saveDesign(){
+ if(!active)return;
+ const data={id:active.id,settings,duration,speed};
+ try{localStorage.setItem("mgs-design",JSON.stringify(data));setStatus("Design saved on this device.");}
+ catch(e){setStatus("Unable to save design in browser storage.");}
+}
+async function loadDesign(){
+ try{
+  const data=JSON.parse(localStorage.getItem("mgs-design")||"null");
+  if(!data){setStatus("No saved design found.");return}
+  const info=manifest.find(t=>t.id===data.id);
+  if(!info){setStatus("The saved template is not in this version.");return}
+  await loadModule(info);
+  settings={...settings,...data.settings};
+  duration=data.duration||duration;speed=data.speed||1;
+  $("duration").value=duration;$("durationLabel").textContent=duration+" sec";
+  $("speed").value=speed*100;$("speedLabel").textContent=speed.toFixed(1)+"×";
+  buildSettings();elapsed=0;draw();setStatus("Saved design loaded.");
+ }catch(e){setStatus("Could not load saved design.");}
+}
+$("save").onclick=saveDesign;
+$("saveTemplate").onclick=saveDesign;
+$("loadTemplate").onclick=loadDesign;
+
+async function exportVideo(){
+ if(!active||recording)return;
+ if(!canvas.captureStream||!window.MediaRecorder){
+  alert("WebM recording is not supported in this browser.");return;
+ }
+ pause();elapsed=0;draw();
+ const stream=canvas.captureStream(30);
+ const types=["video/webm;codecs=vp9","video/webm;codecs=vp8","video/webm"];
+ const mime=types.find(t=>MediaRecorder.isTypeSupported(t));
+ let recorder;
+ try{recorder=new MediaRecorder(stream,mime?{mimeType:mime}:undefined);}
+ catch(e){stream.getTracks().forEach(t=>t.stop());alert("Could not start recording.");return}
+ const chunks=[];
+ recorder.ondataavailable=e=>{if(e.data.size)chunks.push(e.data)};
+ recorder.onstop=()=>{
+  recording=false;stream.getTracks().forEach(t=>t.stop());
+  const blob=new Blob(chunks,{type:"video/webm"});
+  const url=URL.createObjectURL(blob),a=document.createElement("a");
+  a.href=url;a.download=(active.id||"animation")+".webm";a.click();
+  setTimeout(()=>URL.revokeObjectURL(url),30000);
+  $("export").disabled=false;$("export").textContent="Export WebM";
+  setStatus("Video exported. Add voice-over and music in your video editor.");
+ };
+ recording=true;$("export").disabled=true;$("export").textContent="Recording...";
+ recorder.start(200);
+ const start=performance.now(),total=duration*1000;
+ function capture(now){
+  if(!recording)return;
+  elapsed=Math.min(total,now-start);draw();
+  if(elapsed>=total){recorder.stop();return}
+  requestAnimationFrame(capture);
+ }
+ requestAnimationFrame(capture);
+}
+$("export").onclick=exportVideo;
+
+$("templateCount").textContent=manifest.length+" templates";
+renderLibrary();
+if(manifest.length)loadModule(manifest[0]);
+</script>
+</body>
+</html>
