@@ -142,5 +142,125 @@ export const manifest = [
     icon: "📉",
     description: "Dramatic market crash typography",
     path: "./templates/finance/stock-market-crash.js"
-  }
+  },
+  {
+  id:"glass-kpi",
+  name:"Glass KPI",
+  category:"Finance",
+  icon:"💎",
+  description:"Premium glass financial metrics",
+  path:"./templates/finance/glass-kpi.js"
+},
+{
+  id:"neo-finance-dial",
+  name:"Neo Finance Dial",
+  category:"Finance",
+  icon:"◉",
+  description:"Neumorphic financial health gauge",
+  path:"./templates/finance/neo-finance-dial.js"
+},
+{
+  id:"swiss-editorial",
+  name:"Swiss Editorial",
+  category:"Finance",
+  icon:"▤",
+  description:"Swiss-style financial typography",
+  path:"./templates/finance/swiss-editorial.js"
+},
+{
+  id:"isometric-ledger",
+  name:"Isometric Ledger",
+  category:"Finance",
+  icon:"◈",
+  description:"Isometric business finance blocks",
+  path:"./templates/finance/isometric-ledger.js"
+},
+{
+  id:"minimal-line-story",
+  name:"Minimal Line Story",
+  category:"Finance",
+  icon:"〰",
+  description:"Editorial performance line chart",
+  path:"./templates/finance/minimal-line-story.js"
+},
+{
+  id:"dot-matrix-wealth",
+  name:"Dot Matrix Wealth",
+  category:"Finance",
+  icon:"⠿",
+  description:"Dot matrix financial visualization",
+  path:"./templates/finance/dot-matrix-wealth.js"
+},
+{
+  id:"kinetic-statement",
+  name:"Kinetic Statement",
+  category:"Finance",
+  icon:"T",
+  description:"Oversized animated typography",
+  path:"./templates/finance/kinetic-statement.js"
+},
+{
+  id:"split-flap-finance",
+  name:"Split-Flap Finance",
+  category:"Finance",
+  icon:"▦",
+  description:"Mechanical number typography",
+  path:"./templates/finance/split-flap-finance.js"
+},
+{
+  id:"floating-glass-cards",
+  name:"Floating Glass Cards",
+  category:"Finance",
+  icon:"▱",
+  description:"Floating translucent asset cards",
+  path:"./templates/finance/floating-glass-cards.js"
+},
+{
+  id:"bento-finance-grid",
+  name:"Bento Finance Grid",
+  category:"Finance",
+  icon:"▦",
+  description:"Modern bento finance dashboard",
+  path:"./templates/finance/bento-finance-grid.js"
+},
+{
+  id:"radial-wealth-ring",
+  name:"Radial Wealth Ring",
+  category:"Finance",
+  icon:"◎",
+  description:"Concentric wealth allocation rings",
+  path:"./templates/finance/radial-wealth-ring.js"
+},
+{
+  id:"financial-timeline",
+  name:"Financial Timeline",
+  category:"Finance",
+  icon:"◷",
+  description:"Minimal financial milestone timeline",
+  path:"./templates/finance/financial-timeline.js"
+},
+{
+  id:"liquid-asset-flow",
+  name:"Liquid Asset Flow",
+  category:"Finance",
+  icon:"〰",
+  description:"Liquid-inspired capital visualization",
+  path:"./templates/finance/liquid-asset-flow.js"
+},
+{
+  id:"parallax-layers",
+  name:"Parallax Layers",
+  category:"Finance",
+  icon:"▱",
+  description:"Layered economic landscape",
+  path:"./templates/finance/parallax-layers.js"
+},
+{
+  id:"particle-wealth",
+  name:"Particle Wealth",
+  category:"Finance",
+  icon:"✧",
+  description:"Ambient particle typography",
+  path:"./templates/finance/particle-wealth.js"
+}
 ];
